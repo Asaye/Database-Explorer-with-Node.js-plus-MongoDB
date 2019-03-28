@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<title> <%= title %> </title>
+	<link rel = "stylesheet" type="text/css" href="css/custom/main.css" />
+</head>
+<body  class = "error-page">
+<div style = "width:50%;">
+	<div class = "fill-both-abs center-horizontal">
+		 <div class = "center-vertical error-message">
+			  <h1 style = "font-size:10em;"> <%= status %> </h1>
+			  <h1> <%= message %> </h1>
+			  <div id = 'redirect'> You will be redirected to login page in 
+					<span id = "countdown"> <%= countdown %> </span> seconds. 
+			  </div>
+	</div>
+</div>	
+	<script type = "text/javascript"> 
+		var counter = 4, 
+		redirect = document.querySelector("#redirect").innerHTML,
+		countdown = document.querySelector("#countdown").innerHTML;
+		if (!isNaN(countdown) && Number(countdown) != 0) {
+			var timer = setInterval(()=>{
+				document.querySelector("#countdown").innerHTML = counter --;
+				if (counter < 0) clearInterval(timer);
+			}, 1000);
+			setTimeout(() => {
+				window.location.assign("/");
+			}, 5000);
+		} else {
+			document.querySelector("#redirect").innerHTML = "";
+		}
+	</script>
+</body>
+</html>
